@@ -8,8 +8,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        println("NMEDIA!")
-        println(R.string.nmedia)
-        println(getString(R.string.nmedia))
     }
 }

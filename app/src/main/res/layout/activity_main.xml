@@ -17,13 +17,16 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="@dimen/imageSize"
         android:layout_height="@dimen/imageSize"
-        android:layout_margin="@dimen/offset"
+        android:layout_marginTop="@dimen/offset"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_netology"
+
         tools:srcCompat="@sample/posts_avatars" />
 
     <TextView
@@ -33,7 +36,7 @@
         android:layout_marginStart="@dimen/offset"
         android:ellipsize="end"
         android:singleLine="true"
-        android:text="TextView"
+        android:text="@string/authorPost"
         android:textColor="#2196F3"
         app:layout_constraintBottom_toTopOf="@id/published"
         app:layout_constraintEnd_toStartOf="@id/menu"
@@ -46,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/offset"
-        android:text="TextView"
+        android:text="@string/datePost"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@+id/author"
@@ -69,17 +72,18 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar, published, menu"
-        />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="80dp" />
 
     <TextView
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/contentPost"
         android:layout_marginTop="@dimen/offset"
-        app:layout_constraintTop_toBottomOf="@id/barrier"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barrier"
         tools:text="@sample/posts.json/data/content" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -87,7 +91,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="content" />
+        app:constraint_referenced_ids="content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="265dp" />
 
     <ImageButton
         android:id="@+id/likesButton"
@@ -99,6 +105,64 @@
         app:layout_constraintTop_toBottomOf="@id/barrierAfterContent"
         android:layout_marginTop="@dimen/offset"
         />
+
+    <TextView
+        android:id="@+id/countToShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/countLikes"
+        app:layout_constraintBottom_toBottomOf="@+id/likesButton"
+        app:layout_constraintStart_toEndOf="@+id/likesButton"
+        app:layout_constraintTop_toTopOf="@+id/likesButton"
+        app:layout_constraintEnd_toStartOf="@id/toShare"
+        android:layout_marginStart="@dimen/indentFromLikes"/>
+
+    <ImageButton
+        android:id="@+id/toShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/likesButton"
+        app:layout_constraintStart_toEndOf="@id/countToShare"
+        app:layout_constraintTop_toTopOf="@id/barrierAfterContent"
+        android:layout_marginTop="@dimen/offset"
+        android:layout_marginStart="@dimen/offset"
+        android:background="@android:color/transparent"
+
+        app:srcCompat="@drawable/ic_baseline_share_24" />
+
+    <TextView
+        android:id="@+id/textToShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indentFromLikes"
+        android:layout_marginTop="@dimen/offset"
+        android:text="@string/countToShare"
+        app:layout_constraintBottom_toBottomOf="@+id/toShare"
+        app:layout_constraintStart_toEndOf="@id/toShare"
+        app:layout_constraintTop_toBottomOf="@id/barrierAfterContent" />
+
+    <ImageButton
+        android:id="@+id/countViews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/offset"
+        android:layout_marginEnd="@dimen/indentFromLikes"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@+id/likesButton"
+        app:layout_constraintEnd_toStartOf="@+id/textCountViews"
+        app:layout_constraintTop_toBottomOf="@id/barrierAfterContent"
+        app:srcCompat="@drawable/ic_baseline_visibility_24" />
+
+    <TextView
+        android:id="@+id/textCountViews"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/offset"
+        android:text="500K"
+        app:layout_constraintBottom_toBottomOf="@+id/countViews"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/barrierAfterContent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

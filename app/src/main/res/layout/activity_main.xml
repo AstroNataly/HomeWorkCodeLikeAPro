@@ -39,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/offset"
-        android:text="@string/datePost"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toBottomOf="@+id/author"
@@ -68,8 +67,8 @@
         android:id="@+id/content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/contentPost"
         android:layout_marginTop="@dimen/offset"
+        android:autoLink="web"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier"
@@ -94,23 +93,25 @@
         android:layout_marginTop="@dimen/offset"
         />
 
+
     <TextView
-        android:id="@+id/countToShare"
+        android:id="@+id/countToLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/indentFromLikes"
         android:text="@string/countLikes"
         app:layout_constraintBottom_toBottomOf="@+id/likesButton"
+        app:layout_constraintEnd_toStartOf="@id/toShare"
         app:layout_constraintStart_toEndOf="@+id/likesButton"
         app:layout_constraintTop_toTopOf="@+id/likesButton"
-        app:layout_constraintEnd_toStartOf="@id/toShare"
-        android:layout_marginStart="@dimen/indentFromLikes"/>
+        tools:text="@string/countLikes" />
 
     <ImageButton
         android:id="@+id/toShare"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="@+id/likesButton"
-        app:layout_constraintStart_toEndOf="@id/countToShare"
+        app:layout_constraintStart_toEndOf="@id/countToLike"
         app:layout_constraintTop_toTopOf="@id/barrierAfterContent"
         android:layout_marginTop="@dimen/offset"
         android:layout_marginStart="@dimen/offset"
@@ -127,7 +128,8 @@
         android:text="@string/countToShare"
         app:layout_constraintBottom_toBottomOf="@+id/toShare"
         app:layout_constraintStart_toEndOf="@id/toShare"
-        app:layout_constraintTop_toBottomOf="@id/barrierAfterContent" />
+        app:layout_constraintTop_toBottomOf="@id/barrierAfterContent"
+        tools:text="@string/countToShare" />
 
     <ImageButton
         android:id="@+id/countViews"

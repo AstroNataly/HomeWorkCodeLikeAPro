@@ -2,6 +2,7 @@
     <string name="app_name">NMedia!</string>
     <string name="nmedia">NMedia!</string>
     <string name="countLikes">10</string>
+    <string name="countLikesChanged">11</string>
     <string name="countToShare">5</string>
     <string name="authorPost">Netology. University of Internet Professions of the Future</string>
     <string name="datePost">May 21 at 18:36</string>

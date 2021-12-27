@@ -3,6 +3,7 @@
     <string name="app_name">НМедиа</string>
     <string name="nmedia">НМедиа!</string>
     <string name="countLikes">10</string>
+    <string name="countLikesChanged">11</string>
     <string name="countToShare">5</string>
     <string name="authorPost">Нетология. Университет интернет-профессий будущего</string>
     <string name="datePost">21 мая в 18:36</string>

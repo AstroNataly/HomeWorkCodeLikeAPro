@@ -21,25 +21,35 @@ class MainActivity : AppCompatActivity() {
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
-
-
+            countLikes = 10,
+            countShares = 5,
 
         )
+
+
+
         with(binding) {
             author.text = post.author
             content.text = post.content
             published.text = post.published
 
-
-
             setLike(post)
+            setCountLike(post)
 
             likesButton.setOnClickListener {
                 post.likedByMe = !post.likedByMe
-
                 setLike(post)
                 setCountLike(post)
             }
+
+
+            toShare.setOnClickListener {
+                post.shareByMe
+                post.countShares += 1
+                textToShare.text = (post.countShares).toString()
+            }
+
+
         }
     }
 
@@ -47,25 +57,23 @@ class MainActivity : AppCompatActivity() {
         likesButton.setImageResource(
             if (post.likedByMe) {
                 R.drawable.ic_liked
-
             } else {
                 R.drawable.ic_baseline_favorite_border_24
-
             }
         )
     }
 
     private fun  ActivityMainBinding.setCountLike(post: Post) {
-        countToLike.setText(
-            if (post.likedByMe) {
-                R.string.countLikesChanged
-
-            } else {
-                R.string.countLikes
-
-            }
-        )
+        countToLike.text = if (post.likedByMe) {
+            (post.countLikes + 1).toString()
+        } else {
+            (post.countLikes).toString()
+        }
     }
 
+    private fun converter(post: Post) {
+       TODO()
+
+    }
 
 }

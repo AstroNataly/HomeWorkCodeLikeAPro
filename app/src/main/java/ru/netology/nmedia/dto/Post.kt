@@ -9,6 +9,7 @@ data class Post(
     val countLikes: Int = 0,
     var shareByMe: Boolean = true,
     var countShares: Int = 0,
+    val countViews: Int = 0,
 
 
 

@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity() {
             author = "Нетология. Университет интернет-профессий будущего",
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
-            countLikes = 10_100_000,
-            countShares = 10_000_569,
+            countLikes = 105,
+            countShares = 145,
+            countViews = 459_000
 
         )
 
@@ -34,6 +35,7 @@ class MainActivity : AppCompatActivity() {
             content.text = post.content
             published.text = post.published
             textToShare.text = converterToShare(post)
+            textCountViews.text = converterToCountViews(post)
 
             setLike(post)
             setCountLike(post)
@@ -50,8 +52,6 @@ class MainActivity : AppCompatActivity() {
                 post.countShares += 1
                 textToShare.text = converterToShare(post)
             }
-
-
         }
     }
 
@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         countToLike.text = if (post.likedByMe) {
             converterToLikes(post)
         } else {
-            (post.countLikes).toString()
             converterToDislikes(post)
         }
     }
@@ -85,9 +84,8 @@ class MainActivity : AppCompatActivity() {
                    (post.countShares / 1_000_000.0.roundToInt()) / 10.0).toString() + "M"
            in 10_000_000..99_999_999 -> ((post.countShares / 1_000_000.0.roundToInt()) +
                    (post.countShares / 1_000_000.0.roundToInt()) / 100.0).toString() + "M"
-           else -> ((post.countShares / 100_000_000.0.roundToInt()) +
-                   (post.countShares / 100_000_000.0.roundToInt()) / 1_000.0).toString() + "M"
-
+           else -> ((post.countShares / 1_000_000.0.roundToInt()) +
+                   (post.countShares / 1_000_000.0.roundToInt()) / 1000.0).toString() + "M"
        }
     }
 
@@ -98,11 +96,13 @@ class MainActivity : AppCompatActivity() {
             in 1_100..9_999 -> (((post.countLikes + 1) / 1_000.0.roundToInt()) +
                     ((post.countLikes + 1) / 1_000.0.roundToInt()) / 10.0).toString() + "K"
             in 10_000..999_999 -> ((post.countLikes + 1) / 1_000.0.roundToInt()).toString() + "K"
-            else -> (((post.countLikes + 1) / 1_000_000.0.roundToInt()) +
+            in 1_000_000..9_999_999 -> (((post.countLikes +1) / 1_000_000.0.roundToInt()) +
                     ((post.countLikes + 1) / 1_000_000.0.roundToInt()) / 10.0).toString() + "M"
-
+            in 10_000_000..99_999_999 -> (((post.countLikes +1) / 1_000_000.0.roundToInt()) +
+                    ((post.countLikes + 1) / 1_000_000.0.roundToInt()) / 100.0).toString() + "M"
+            else -> (((post.countLikes + 1) / 1_000_000.0.roundToInt()) +
+                    ((post.countLikes + 1) / 1_000_000.0.roundToInt()) / 1000.0).toString() + "M"
         }
-
     }
 
     private fun converterToDislikes(post: Post): String {
@@ -112,11 +112,28 @@ class MainActivity : AppCompatActivity() {
             in 1_100..9_999 -> ((post.countLikes / 1_000.0.roundToInt()) +
                     (post.countLikes / 1_000.0.roundToInt()) / 10.0).toString() + "K"
             in 10_000..999_999 -> (post.countLikes / 1_000.0.roundToInt()).toString() + "K"
+            in 1_000_000..9_999_999 -> ((post.countLikes / 1_000_000.0.roundToInt()) +
+                    (post.countLikes / 1_000_000.0.roundToInt()) / 10.0).toString() + "M"
+            in 10_000_000..99_999_999 -> ((post.countLikes / 1_000_000.0.roundToInt()) +
+                    (post.countLikes / 1_000_000.0.roundToInt()) / 100.0).toString() + "M"
             else -> ((post.countLikes / 1_000_000.0.roundToInt()) +
                     (post.countLikes / 1_000_000.0.roundToInt()) / 10.0).toString() + "M"
-
         }
-
     }
 
+    private fun converterToCountViews(post: Post): String {
+        return when (post.countViews) {
+            in 0..999 -> (post.countViews).toString()
+            in 1_000..1_099 -> (post.countViews / 1_000.0.roundToInt()).toString() + "K"
+            in 1_100..9_999 -> ((post.countViews / 1_000.0.roundToInt()) +
+                    (post.countViews / 1_000.0.roundToInt()) / 10.0).toString() + "K"
+            in 10_000..999_999 -> (post.countViews / 1_000.0.roundToInt()).toString() + "K"
+            in 1_000_000..9_999_999 -> ((post.countViews / 1_000_000.0.roundToInt()) +
+                    (post.countViews / 1_000_000.0.roundToInt()) / 10.0).toString() + "M"
+            in 10_000_000..99_999_999 -> ((post.countViews / 1_000_000.0.roundToInt()) +
+                    (post.countViews / 1_000_000.0.roundToInt()) / 100.0).toString() + "M"
+            else -> ((post.countViews / 1_000_000.0.roundToInt()) +
+                    (post.countViews / 1_000_000.0.roundToInt()) / 1000.0).toString() + "M"
+        }
+    }
 }

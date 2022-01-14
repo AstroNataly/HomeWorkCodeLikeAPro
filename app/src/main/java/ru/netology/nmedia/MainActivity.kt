@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.annotation.NonNull
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.dto.Post
+import ru.netology.nmedia.viewmodel.PostViewModel
 import kotlin.math.log
 import kotlin.math.roundToInt
 
@@ -17,41 +19,35 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val post = Post(
-            id = 1,
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
-            published = "21 мая в 18:36",
-            countLikes = 105,
-            countShares = 145,
-            countViews = 459_000
-
-        )
-
-
+        val viewModel by viewModels<PostViewModel>()
 
         with(binding) {
-            author.text = post.author
-            content.text = post.content
-            published.text = post.published
-            textToShare.text = converterToShare(post)
-            textCountViews.text = converterToCountViews(post)
+            viewModel.get().observe(this@MainActivity) { post ->
+                author.text = post.author
+                content.text = post.content
+                published.text = post.published
+                textToShare.text = converterToShare(post)
+                textCountViews.text = converterToCountViews(post)
 
-            setLike(post)
-            setCountLike(post)
-
-            likesButton.setOnClickListener {
-                post.likedByMe = !post.likedByMe
                 setLike(post)
                 setCountLike(post)
+
+                likesButton.setOnClickListener {
+                    viewModel.like()
+                    setLike(post)
+                    setCountLike(post)
+                }
+
+
+                toShare.setOnClickListener {
+                    viewModel.share()
+                    post.shareByMe
+                    post.countShares += 1
+                    textToShare.text = converterToShare(post)
+                }
             }
 
 
-            toShare.setOnClickListener {
-                post.shareByMe
-                post.countShares += 1
-                textToShare.text = converterToShare(post)
-            }
         }
     }
 
